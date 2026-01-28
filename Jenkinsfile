@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven-3.9.6'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -11,7 +15,8 @@ pipeline {
 
         stage('Build Spring Boot JAR') {
             steps {
-                echo 'Building Spring Boot application...'
+                echo 'Building Spring Boot application using Jenkins Maven...'
+                bat 'mvn -version'
                 bat 'mvn clean package -DskipTests'
             }
         }
