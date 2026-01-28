@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     tools {
+        jdk 'jdk17'
         maven 'maven'
     }
 
@@ -16,18 +17,10 @@ pipeline {
         stage('Build Spring Boot JAR') {
             steps {
                 echo 'Building Spring Boot application...'
+                bat 'java -version'
                 bat 'mvn -version'
                 bat 'mvn clean package -DskipTests'
             }
-        }
-    }
-
-    post {
-        success {
-            echo '✅ Build successful'
-        }
-        failure {
-            echo '❌ Build failed. Check Jenkins logs.'
         }
     }
 }
